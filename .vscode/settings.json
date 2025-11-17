@@ -1,0 +1,141 @@
+{
+  // ============================================================================
+  // TrendRadar 子模块 VSCode 配置
+  // 生成时间: 2025-11-17
+  // 说明: 本配置为 TrendRadar 子模块专属，自动检测并配置所有语言工具链
+  // ============================================================================
+
+  // ============================================================================
+  // 1. Python 配置 (主要语言)
+  // ============================================================================
+  // 检测到: requirements.txt, pyproject.toml, setup-windows.bat, setup-mac.sh
+  // 工具链: uv (主要), pip (备选)
+  // Python 版本: 3.10+
+
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": ["--max-line-length=120"],
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length=120"],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+
+  // Python: uv 工具链支持 (主要 - 推荐)
+  // 说明: TrendRadar 使用 uv 管理依赖 (pyproject.toml + requirements.txt)
+  // 设置方式:
+  //   1. 安装 uv: pip install uv 或访问 https://docs.astral.sh/uv/getting-started/installation/
+  //   2. 创建虚拟环境: uv venv
+  //   3. 激活: source .venv/bin/activate (Linux/macOS) 或 .venv\Scripts\activate (Windows)
+  //   4. 安装依赖: uv sync
+  //   或使用一键部署脚本: setup-windows.bat (Windows) 或 setup-mac.sh (Mac)
+  "python.terminal.executeInFileDir": true,
+  "python.terminal.focusAfterLaunch": true,
+
+  // Python: pip 环境配置 (备选)
+  // 注释提示: 如果需要使用 pip 管理环境，取消下面的注释并注释掉 uv 配置
+  //   1. 创建虚拟环境: python -m venv .venv
+  //   2. 激活: source .venv/bin/activate (Linux/macOS) 或 .venv\Scripts\activate (Windows)
+  //   3. 安装依赖: pip install -r requirements.txt
+  // "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+
+  // Python: mypy 类型检查
+  "python.linting.mypyEnabled": true,
+  "python.linting.mypyArgs": [
+    "--ignore-missing-imports",
+    "--no-implicit-optional"
+  ],
+
+  // ============================================================================
+  // 2. 编辑器通用配置
+  // ============================================================================
+
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "ms-python.python",
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "on",
+  "editor.trimAutoWhitespace": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // ============================================================================
+  // 3. 文件关联与排除
+  // ============================================================================
+
+  "files.associations": {
+    "*.py": "python",
+    "*.json": "json",
+    "*.yml": "yaml",
+    "*.yaml": "yaml",
+    "*.toml": "toml",
+    "*.sh": "shellscript",
+    "*.bat": "batch"
+  },
+
+  // 排除临时目录和常见构建产物
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.egg-info": true,
+    "**/.venv": true,
+    "**/venv": true,
+    "**/.env": true,
+    "**/.DS_Store": true,
+    "**/*.egg-info": true,
+    "**/output": true,
+    "**/.push_records": true
+  },
+
+  "search.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/dist": true,
+    "**/.venv": true,
+    "**/venv": true,
+    "**/.git": true,
+    "**/output": true,
+    "**/.push_records": true
+  },
+
+  // ============================================================================
+  // 4. 调试配置
+  // ============================================================================
+
+  "python.debugging.logDir": "${workspaceFolder}/.vscode/debug_logs",
+  "debug.console.fontSize": 12,
+
+  // ============================================================================
+  // 5. 扩展配置
+  // ============================================================================
+
+  // Pylance (Python 语言服务器 - 内置于 Python 扩展)
+  "pylance.typeCheckingMode": "basic",
+  "pylance.diagnosticsMode": "workspace",
+
+  // ============================================================================
+  // 6. 工作区特定配置
+  // ============================================================================
+
+  // 子模块根路径识别
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}",
+    "${workspaceFolder}/mcp_server",
+    "${workspaceFolder}/config"
+  ],
+
+  // 忽略 .vscode 文件夹被 .gitignore 忽略
+  // 注意: .vscode/settings.json 应被提交到 Git，以便团队共享配置
+  "git.ignoreLimitWarning": true
+}
